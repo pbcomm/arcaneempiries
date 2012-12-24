@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="jquery-1.8.3.js"></script>
+</head>
+<body>
+<script>
+    var makeTiles = function() {
+
+        console.log(arguments);
+    };
+
+    $.ajax({
+        crossDomain: true,
+        url: 'tiles.json',
+        dataType: 'jsonp',
+        jsonpCallback: 'makeTiles'
+    });
+</script>
+
+</body>
+</html>
