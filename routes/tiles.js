@@ -7,6 +7,19 @@ var mongoose = require('mongoose'),
 /*
  * GET tiles
  */
+
+exports.listView = function(req, res){
+    Tiles.find({})
+        .sort({ x: 1, y: 1 })
+        .populate('worldId')
+        .exec(function(e, doc){
+            res.render('index', {
+                title: 'More Tiles',
+                tiles: doc
+            });
+        });
+};
+
 exports.list = function(req, res){
     Tiles.find({})
         .populate('worldId')

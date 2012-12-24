@@ -3,3 +3,12 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  div.tiles
+      for tile in tiles
+        div.tile
+            div
+                b #{tile.userId.n}
+                | - #{tile.allianceId.name}
+
+            div [#{tile.x}, #{tile.y}]

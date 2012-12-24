@@ -30,7 +30,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
+app.get('/', tiles.listView);
 app.get('/tiles', tiles.list);
 app.get('/tiles/user/:user', tiles.listByUser);
 app.get('/tiles/alliance/:alliance', tiles.listByAlliance);
