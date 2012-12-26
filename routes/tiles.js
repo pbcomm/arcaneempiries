@@ -44,7 +44,10 @@ exports.listByPlayer = function(req, res){
         .populate('worldId')
         .sort({ x: 1, y: 1 })
         .exec(function(e, doc) {
-            res.json(doc);
+            res.render('list', {
+                title: 'Player Island List: ' + player + ' :: ' + doc[0].user.m,
+                tiles: doc
+            });
         });
 };
 
@@ -59,7 +62,5 @@ exports.listByAlliance = function(req, res){
                 title: 'Alliance Player List: ' + alliance + ' :: ' + doc[0].alliance.might,
                 tiles: doc
             });
-
-            console.log(doc);
         });
 };

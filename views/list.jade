@@ -16,8 +16,18 @@ block content
                     div
                         b Might:&nbsp;
                         span #{tile.user.m}
-                    if tile.tileType == 51
+                    div
+                        b Province:&nbsp;
+                        span #{tile.provinceName}
+
+                    if tile.tileType == 51 && tile.cityName
                         div
                             b City Name:&nbsp;
                             span #{tile.cityName}
+
+                    if tile.tileType != 51
+                        div
+                            b Island Type:&nbsp;
+                            span #{tile.tileName}
+
                 div [x:#{tile.x}, y:#{tile.y}]

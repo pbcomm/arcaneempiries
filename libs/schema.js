@@ -44,6 +44,7 @@ var
         x: Number,
         y: Number,
         tileType: Number, //{ type: Schema.Types.ObjectId, ref: 'TileType' },
+        tileName: String,
         originalLevel: Number,
         level: Number,
         cityId: Number,
@@ -51,6 +52,7 @@ var
         user: {}, //{ type: Schema.Types.ObjectId, ref: 'Player' },
         alliance: {}, //{ type: Schema.Types.ObjectId, ref: 'Alliance' },
         provinceId: Number,
+        provinceName: String,
         blockId: Number
     });
 
