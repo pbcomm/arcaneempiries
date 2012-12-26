@@ -29,7 +29,7 @@ var
     }),
 
     TileType = new Schema({
-        tileType: { type: Number, index: true },
+        id: { type: Number, index: true },
         name: String
     }),
 

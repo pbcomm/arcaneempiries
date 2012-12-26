@@ -1,14 +1,18 @@
 extends layout
 
+block scripts
+    script(src='/js/core.js')
+
 block content
-  h1= title
-  p Welcome to #{title}
+    h1= title
+    p Welcome to #{title}
 
-  div.tiles
-      for tile in tiles
-        div.tile
-            div
-                b #{tile.userId.n}
-                | - #{tile.allianceId.name}
-
-            div [#{tile.x}, #{tile.y}]
+    div.alliance
+        select.alliance
+            option Select Alliance
+            for alliance in alliances
+                option(value="#{alliance}") #{alliance}
+        select.player
+            option Select Player
+            for player in players
+                option(value="#{player}") #{player}

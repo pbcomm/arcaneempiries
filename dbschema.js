@@ -8,43 +8,52 @@
 exports.schema = {
 
     worldSchema: {
-        world: String
+        worldId: { type: Number, index: true },
+        worldName: String,
+        language: { type: String, default: 'en' }
     },
 
     requestSchema: {
+        worldId: { type: Schema.Types.ObjectId, ref: 'World' },
         data: String,
-        lastUpdate: { type: Date, default: Date.now },
-        world: { type: Schema.Types.ObjectId, ref: 'World' }
+        lastUpdate: { type: Date, default: Date.now }
     },
 
     userSchema: {
+        worldId: [{ type: Schema.Types.ObjectId, ref: 'World' }],
         id: Number,
         name: String,
         level: Number,
-        alliance: { type: Schema.Types.ObjectId, ref: 'Alliance' },
-        might: Number
+        allianceId: { type: Schema.Types.ObjectId, ref: 'Alliance' },
+        might: Number,
+        s: String,
+        w: String,
+        i: String
     },
 
     allianceSchema: {
-        id: Number,
+        worldId: { type: Schema.Types.ObjectId, ref: 'World' },
+        id: { type: Number, index: true },
         name: String,
         might: Number
     },
 
     tileTypeSchema: {
-        id: Number,
+        id: { type: Number, index: true },
         name: String
     },
 
     tilesSchecma: {
+        worldId: { type: Schema.Types.ObjectId, ref: 'World' },
         id: Number,
         x: Number,
         y: Number,
-        type: { type: Schema.Types.ObjectId, ref: 'TileType' },
+        tileType: { type: Schema.Types.ObjectId, ref: 'TileType' },
         originalLevel: Number,
         level: Number,
         cityId: Number,
-        userId: { type: Schema.Types.ObjectId, ref: 'User' },
+        cityName: String,
+        userId: { type: Schema.Types.ObjectId, ref: 'Player' },
         allianceId: { type: Schema.Types.ObjectId, ref: 'Alliance' },
         provinceId: Number,
         blockId: Number

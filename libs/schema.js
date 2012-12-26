@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var
     World = new Schema({
-        worldId: { type: Number, index: true },
+        id: { type: Number, index: true },
         worldName: String,
         language: { type: String, default: 'en' }
     }),
@@ -48,8 +48,8 @@ var
         level: Number,
         cityId: Number,
         cityName: String,
-        userId: {}, //{ type: Schema.Types.ObjectId, ref: 'Player' },
-        allianceId: {}, //{ type: Schema.Types.ObjectId, ref: 'Alliance' },
+        user: {}, //{ type: Schema.Types.ObjectId, ref: 'Player' },
+        alliance: {}, //{ type: Schema.Types.ObjectId, ref: 'Alliance' },
         provinceId: Number,
         blockId: Number
     });

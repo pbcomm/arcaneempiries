@@ -3,37 +3,47 @@ var mongoose = require('mongoose'),
     World = mongoose.model('World'),
     Tiles = mongoose.model('Tiles');
 
-
 /*
  * GET tiles
  */
+exports.listView = function(req, res) {
+    var
+        alliances = [],
+        players = [];
 
-exports.listView = function(req, res){
     Tiles.find({})
-        .sort({ x: 1, y: 1 })
-        .populate('worldId')
-        .exec(function(e, doc){
+        .distinct('alliance.name', function(e, doc) {
+            alliances = doc;
+        })
+        .distinct('user.n', function(e, doc) {
+            players = doc;
+        })
+        .find({})
+        .exec(function(e, doc) {
             res.render('index', {
                 title: 'More Tiles',
-                tiles: doc
+                players: players.sort(),
+                alliances: alliances.sort()
             });
         });
 };
 
 exports.list = function(req, res){
     Tiles.find({})
+        .sort({ x: 1, y: 1 })
         .populate('worldId')
-        .exec(function(e, doc){
+        .exec(function(e, doc) {
             res.json(doc);
         });
 };
 
-exports.listByUser = function(req, res){
-    var user = req.params.user;
+exports.listByPlayer = function(req, res){
+    var player = req.params.player;
 
-    Tiles.find({ "userId.n": user })
+    Tiles.find({ "user.n": player })
         .populate('worldId')
-        .exec(function(e, doc){
+        .sort({ x: 1, y: 1 })
+        .exec(function(e, doc) {
             res.json(doc);
         });
 };
@@ -41,9 +51,15 @@ exports.listByUser = function(req, res){
 exports.listByAlliance = function(req, res){
     var alliance = req.params.alliance;
 
-    Tiles.find({ "allianceId.name": alliance })
+    Tiles.find({ "alliance.name": alliance })
         .populate('worldId')
-        .exec(function(e, doc){
-            res.json(doc);
+        .sort({ x: 1, y: 1 })
+        .exec(function(e, doc) {
+            res.render('list', {
+                title: 'Alliance Player List: ' + alliance + ' :: ' + doc[0].alliance.might,
+                tiles: doc
+            });
+
+            console.log(doc);
         });
 };

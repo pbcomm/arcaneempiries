@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    h1= title
+
+    div.tiles
+        for tile in tiles
+            div.tile
+                div
+                    div
+                        b Player:&nbsp;
+                        span #{tile.user.n}
+                    div
+                        b Level:&nbsp;
+                        span #{tile.user.t}
+                    div
+                        b Might:&nbsp;
+                        span #{tile.user.m}
+                    if tile.tileType == 51
+                        div
+                            b City Name:&nbsp;
+                            span #{tile.cityName}
+                div [x:#{tile.x}, y:#{tile.y}]
