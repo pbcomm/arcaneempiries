@@ -42,12 +42,16 @@ exports.listByPlayer = function(req, res){
 
     Tiles.find({ "user.n": player })
         .populate('worldId')
-        .sort({ x: 1, y: 1 })
+        .sort({ tileType:-1, x: 1, y: 1 })
         .exec(function(e, doc) {
-            res.render('list', {
-                title: 'Player Island List: ' + player + ' :: ' + doc[0].user.m,
-                tiles: doc
-            });
+            if (doc.length) {
+                res.render('list', {
+                    title: 'Player Island List (' + doc.length + '): ' + player + ' (' + doc[0].user.m + ')',
+                    tiles: doc
+                });
+            } else {
+                res.json({});
+            }
         });
 };
 
@@ -56,10 +60,10 @@ exports.listByAlliance = function(req, res){
 
     Tiles.find({ "alliance.name": alliance })
         .populate('worldId')
-        .sort({ x: 1, y: 1 })
+        .sort({ 'user.n':1, x: 1, y: 1, tyleType:-1 })
         .exec(function(e, doc) {
             res.render('list', {
-                title: 'Alliance Player List: ' + alliance + ' :: ' + doc[0].alliance.might,
+                title: 'Alliance Player List (' + doc.length + '): ' + alliance + ' (' + doc[0].alliance.might + ')',
                 tiles: doc
             });
         });

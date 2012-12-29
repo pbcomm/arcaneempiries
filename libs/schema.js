@@ -53,7 +53,8 @@ var
         alliance: {}, //{ type: Schema.Types.ObjectId, ref: 'Alliance' },
         provinceId: Number,
         provinceName: String,
-        blockId: Number
+        blockId: Number,
+        updated: Date
     });
 
 mongoose.model('World', World);
